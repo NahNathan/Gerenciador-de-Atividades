@@ -28,7 +28,6 @@ const create = async (req, res) => {
                 description: req.body.description,
                 userId: req.body.userId,
                 categoryId: req.body.categoryId,
-
             }
         })
 

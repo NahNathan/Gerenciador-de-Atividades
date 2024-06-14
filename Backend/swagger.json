@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Minha API",
-    "description": "Descrição da API",
+    "title": "API Gerenciador de Tarefas",
+    "description": "Esta API pode gerenciar objetos de atividades, os usuários que criam essas atividades e as categorias dessas atividades",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -19,7 +19,13 @@
         "description": "Endpoint que retorna todas as categorias",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Lista de categorias",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
           }
         }
       },
@@ -28,9 +34,25 @@
           "Category"
         ],
         "description": "Endpoint que cria uma nova categoria",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Categoria criada",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
           }
         }
       }
@@ -40,21 +62,35 @@
         "tags": [
           "Category"
         ],
-        "description": "Endpoint que retorna uma categoria pelo seu identificador",
+        "description": "Endpoint que atualiza uma categoria pelo seu identificador",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Categoria atualizada",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "404": {
+            "description": "Categoria não encontrada"
           }
         }
       },
@@ -73,7 +109,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Categoria removida"
+          },
+          "404": {
+            "description": "Categoria não encontrada"
           }
         }
       }
@@ -86,7 +125,13 @@
         "description": "Endpoint que retorna todas as atividades",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Lista de atividades",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Activity"
+              }
+            }
           }
         }
       },
@@ -95,9 +140,25 @@
           "Activity"
         ],
         "description": "Endpoint que cria uma nova atividade",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Atividade criada",
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
           }
         }
       }
@@ -107,18 +168,35 @@
         "tags": [
           "Activity"
         ],
-        "description": "Endpoint que retorna uma atividade pelo seu identificador",
+        "description": "Endpoint que atualiza uma atividade pelo seu identificador",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Atividade atualizada",
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "404": {
+            "description": "Atividade não encontrada"
           }
         }
       },
@@ -137,7 +215,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Atividade removida"
+          },
+          "404": {
+            "description": "Atividade não encontrada"
           }
         }
       }
@@ -150,7 +231,13 @@
         "description": "Endpoint que retorna todos os usuários",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Lista de usuários",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
           }
         }
       },
@@ -159,9 +246,25 @@
           "User"
         ],
         "description": "Endpoint que cria um novo usuário",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Usuário criado",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
           }
         }
       }
@@ -178,11 +281,28 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Usuário atualizado",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
           }
         }
       },
@@ -201,8 +321,76 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Usuário excluído"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Category": {
+      "type": "object",
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "description": {
+          "type": "string",
+          "example": "Esporte"
+        }
+      }
+    },
+    "Activity": {
+      "type": "object",
+      "required": [
+        "description",
+        "userId",
+        "categoryId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "description": {
+          "type": "string",
+          "example": "Jogar basquete"
+        },
+        "userId": {
+          "type": "integer",
+          "example": 1
+        },
+        "categoryId": {
+          "type": "integer",
+          "example": 1
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Mario"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Mario"
         }
       }
     }
